@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Connection testing endpoint for health check
+    match /test/connection {
+      allow read: if true;
+    }
+
+    // Store workspace and its subcollections for multi-device POS synchronization
+    match /stores/{storeId} {
+      allow read, write: if isSignedIn() && isValidId(storeId);
+
+      match /products/{productId} {
+        allow read, write: if isSignedIn() && isValidId(storeId) && isValidId(productId);
+      }
+
+      match /transactions/{transactionId} {
+        allow read, write: if isSignedIn() && isValidId(storeId) && isValidId(transactionId);
+      }
+
+      match /debts/{debtId} {
+        allow read, write: if isSignedIn() && isValidId(storeId) && isValidId(debtId);
+      }
+
+      match /purchases/{purchaseId} {
+        allow read, write: if isSignedIn() && isValidId(storeId) && isValidId(purchaseId);
+      }
+
+      match /suppliers/{supplierId} {
+        allow read, write: if isSignedIn() && isValidId(storeId) && isValidId(supplierId);
+      }
+
+      match /stockLogs/{logId} {
+        allow read, write: if isSignedIn() && isValidId(storeId) && isValidId(logId);
+      }
+
+      match /activityLogs/{logId} {
+        allow read, write: if isSignedIn() && isValidId(storeId) && isValidId(logId);
+      }
+    }
+
+    // Fallback catch-all default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

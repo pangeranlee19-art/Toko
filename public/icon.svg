@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="roofGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#064e3b" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- App Background Squircle -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+  
+  <g filter="url(#shadow)" transform="translate(76, 76)">
+    <!-- Store Awning Stripes -->
+    <path d="M 20 120 L 340 120 L 320 60 L 40 60 Z" fill="#F8FAFC" />
+    
+    <!-- Awning Scallops -->
+    <path d="M 20 120 Q 40 150 60 120 Q 80 150 100 120 Q 120 150 140 120 Q 160 150 180 120 Q 200 150 220 120 Q 240 150 260 120 Q 280 150 300 120 Q 320 150 340 120 L 340 100 L 20 100 Z" fill="#EF4444" />
+    <path d="M 60 120 Q 80 150 100 120 L 100 60 L 60 60 Z" fill="#EF4444" opacity="0.9" />
+    <path d="M 140 120 Q 160 150 180 120 L 180 60 L 140 60 Z" fill="#EF4444" opacity="0.9" />
+    <path d="M 220 120 Q 240 150 260 120 L 260 60 L 220 60 Z" fill="#EF4444" opacity="0.9" />
+    <path d="M 300 120 Q 320 150 340 120 L 340 60 L 300 60 Z" fill="#EF4444" opacity="0.9" />
+
+    <!-- Store Body / Building -->
+    <rect x="40" y="130" width="280" height="190" rx="16" fill="#FFFFFF" />
+    
+    <!-- Warung Signboard -->
+    <rect x="65" y="145" width="230" height="34" rx="8" fill="url(#roofGrad)" />
+    <text x="180" y="168" font-family="system-ui, sans-serif" font-weight="900" font-size="16" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">WARUNG DIGITAL</text>
+
+    <!-- Cash Register & Barcode Icon in Storefront -->
+    <g transform="translate(75, 195)">
+      <!-- Counter / POS Register -->
+      <rect x="0" y="55" width="210" height="60" rx="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="3" />
+      <!-- Till Drawer -->
+      <line x1="20" y1="85" x2="190" y2="85" stroke="#94A3B8" stroke-width="2" stroke-dasharray="6,4" />
+      <circle cx="105" cy="100" r="5" fill="#64748B" />
+      
+      <!-- Screen -->
+      <rect x="25" y="5" width="70" height="50" rx="6" fill="#0F172A" />
+      <rect x="30" y="10" width="60" height="36" rx="4" fill="#10B981" />
+      <line x1="60" y1="55" x2="60" y2="65" stroke="#334155" stroke-width="6" stroke-linecap="round" />
+      
+      <!-- Barcode / Stock Scanner -->
+      <g transform="translate(125, 0)">
+        <rect x="0" y="5" width="65" height="42" rx="4" fill="#FFFFFF" stroke="#059669" stroke-width="2"/>
+        <line x1="10" y1="12" x2="10" y2="38" stroke="#0F172A" stroke-width="3" />
+        <line x1="16" y1="12" x2="16" y2="38" stroke="#0F172A" stroke-width="1.5" />
+        <line x1="22" y1="12" x2="22" y2="38" stroke="#0F172A" stroke-width="4" />
+        <line x1="30" y1="12" x2="30" y2="38" stroke="#0F172A" stroke-width="2" />
+        <line x1="37" y1="12" x2="37" y2="38" stroke="#0F172A" stroke-width="1.5" />
+        <line x1="44" y1="12" x2="44" y2="38" stroke="#0F172A" stroke-width="3.5" />
+        <line x1="52" y1="12" x2="52" y2="38" stroke="#0F172A" stroke-width="2" />
+        <!-- Scan Beam -->
+        <line x1="6" y1="25" x2="59" y2="25" stroke="#EF4444" stroke-width="2" opacity="0.8" />
+      </g>
+    </g>
+  </g>
+</svg>

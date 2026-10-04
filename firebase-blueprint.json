@@ -1,0 +1,145 @@
+{
+  "entities": {
+    "Store": {
+      "title": "Store",
+      "description": "Store profile and cloud synchronization workspace mapped to owner or user email",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "ownerEmail": { "type": "string", "maxLength": 256 },
+        "ownerUid": { "type": "string", "maxLength": 128 },
+        "storeName": { "type": "string", "maxLength": 200 },
+        "address": { "type": "string", "maxLength": 500 },
+        "phone": { "type": "string", "maxLength": 50 },
+        "createdAt": { "type": "string", "maxLength": 64 },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "ownerEmail", "storeName"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Store inventory catalog item with pricing, barcode, and real-time stock",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "barcode": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 200 },
+        "category": { "type": "string", "maxLength": 100 },
+        "buyPrice": { "type": "number" },
+        "sellPrice": { "type": "number" },
+        "stock": { "type": "number" },
+        "minStock": { "type": "number" },
+        "unit": { "type": "string", "maxLength": 50 },
+        "image": { "type": "string", "maxLength": 100000 },
+        "receivedDate": { "type": "string", "maxLength": 30 },
+        "productionDate": { "type": "string", "maxLength": 30 },
+        "expiryDate": { "type": "string", "maxLength": 30 },
+        "createdAt": { "type": "string", "maxLength": 64 },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "name", "category", "buyPrice", "sellPrice", "stock", "unit"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Completed point of sale invoice and receipt record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "invoiceNumber": { "type": "string", "maxLength": 128 },
+        "date": { "type": "string", "maxLength": 64 },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "totalCost": { "type": "number" },
+        "profit": { "type": "number" },
+        "paymentMethod": { "type": "string", "maxLength": 50 },
+        "cashPaid": { "type": "number" },
+        "change": { "type": "number" },
+        "customerName": { "type": "string", "maxLength": 150 },
+        "customerPhone": { "type": "string", "maxLength": 50 },
+        "cashierName": { "type": "string", "maxLength": 150 },
+        "notes": { "type": "string", "maxLength": 500 }
+      },
+      "required": ["id", "invoiceNumber", "date", "items", "totalAmount", "paymentMethod"]
+    },
+    "DebtRecord": {
+      "title": "DebtRecord",
+      "description": "Customer credit, debt, and installment payment history record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "transactionId": { "type": "string", "maxLength": 128 },
+        "customerName": { "type": "string", "maxLength": 150 },
+        "customerPhone": { "type": "string", "maxLength": 50 },
+        "totalDebt": { "type": "number" },
+        "remainingDebt": { "type": "number" },
+        "createdAt": { "type": "string", "maxLength": 64 },
+        "updatedAt": { "type": "string", "maxLength": 64 },
+        "dueDate": { "type": "string", "maxLength": 30 },
+        "status": { "type": "string", "maxLength": 50 },
+        "itemsSummary": { "type": "string", "maxLength": 1000 },
+        "payments": { "type": "array" },
+        "notes": { "type": "string", "maxLength": 500 }
+      },
+      "required": ["id", "customerName", "totalDebt", "remainingDebt", "status"]
+    },
+    "PurchaseOrder": {
+      "title": "PurchaseOrder",
+      "description": "Wholesale supplier purchase and restock incoming invoice record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "invoiceNo": { "type": "string", "maxLength": 128 },
+        "date": { "type": "string", "maxLength": 64 },
+        "supplierName": { "type": "string", "maxLength": 150 },
+        "totalAmount": { "type": "number" },
+        "paymentType": { "type": "string", "maxLength": 50 },
+        "paymentStatus": { "type": "string", "maxLength": 50 },
+        "dueDate": { "type": "string", "maxLength": 30 },
+        "items": { "type": "array" },
+        "isReturn": { "type": "boolean" }
+      },
+      "required": ["id", "invoiceNo", "date", "supplierName", "totalAmount", "paymentType", "paymentStatus"]
+    },
+    "Supplier": {
+      "title": "Supplier",
+      "description": "Vendor and distributor partnership profile with payable debt tracking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 150 },
+        "phone": { "type": "string", "maxLength": 50 },
+        "address": { "type": "string", "maxLength": 500 },
+        "contactPerson": { "type": "string", "maxLength": 150 },
+        "debt": { "type": "number" },
+        "dueDate": { "type": "string", "maxLength": 30 }
+      },
+      "required": ["id", "name", "phone", "debt"]
+    }
+  },
+  "firestore": {
+    "/stores/{storeId}": {
+      "schema": "Store",
+      "description": "Store configuration and connection settings for multi-device sync"
+    },
+    "/stores/{storeId}/products/{productId}": {
+      "schema": "Product",
+      "description": "Products catalog and real-time inventory level synced across all cashier phones"
+    },
+    "/stores/{storeId}/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "POS sales transactions recorded from any cashier phone in real-time"
+    },
+    "/stores/{storeId}/debts/{debtId}": {
+      "schema": "DebtRecord",
+      "description": "Customer debts and payments ledger synced across devices"
+    },
+    "/stores/{storeId}/purchases/{purchaseId}": {
+      "schema": "PurchaseOrder",
+      "description": "Wholesale supplier purchase orders and stock restocks"
+    },
+    "/stores/{storeId}/suppliers/{supplierId}": {
+      "schema": "Supplier",
+      "description": "Distributors and supplier directory"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "WarungPro - Kasir & Stok Warung Kelontong",
+  "description": "Aplikasi kasir digital (POS) dan manajemen inventaris stok warung kelontong lengkap dengan buku kasbon, laporan laba rugi, dan cetak struk.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
